@@ -2,129 +2,123 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Princess Crown - Special Gift</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Meow+Script&display=swap" rel="stylesheet">
-	<style>
-		html,
-		body {
-			background: #131b21;
-			width: 100%;
-			height: 100%;
-			margin: 0;
-			padding: 0;
-			overflow: hidden;
-			/* Stops scrolling */
-			touch-action: none;
-			/* Prevents zoom gestures */
-			user-select: none;
-			-webkit-user-select: none;
-		}
+    <meta charset="UTF-8">
+    <title>Princess Crown Gift</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Meow+Script&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            background: #131b21;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            touch-action: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
-		.container {
-			width: 90%;
-			margin: 0 auto;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			min-height: 100vh;
-		}
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-		svg {
-			max-width: 100vw;
-			max-height: 100vh;
-			display: block;
-			margin: auto;
-			object-fit: contain;
-		}
+        svg {
+            max-width: 100vw;
+            max-height: 100vh;
+            display: block;
+            margin: auto;
+            object-fit: contain;
+        }
 
-		svg#flower-frame {
-			height: 90vh;
-			width: 100%;
-		}
+        svg#flower-frame {
+            height: 90vh;
+            width: 100%;
+        }
 
-		/* Initial Visibility Settings for Animation */
-		#Footer_group_1_,
-		[id^=PinkFlowerGroup],
-		[id^=BaseGroup] path,
-		[id^=LeafGroup] path,
-		path[id^=Stroke],
-		g[id^=BudGroup] g[id^=BudGroup] g[id^=Bud],
-		#Bud8_1_,
-		#Bud10_1_,
-		#Bud23_1_,
-		#Bud26_1_,
-		[id^=Dots],
-		[id^=Flourish] {
-			visibility: hidden;
-		}
+        /* Initial Hiding */
+        #Footer_group_1_, [id^=PinkFlowerGroup], [id^=BaseGroup] path,
+        [id^=LeafGroup] path, path[id^=Stroke],
+        g[id^=BudGroup] g[id^=BudGroup] g[id^=Bud],
+        #Bud8_1_, #Bud10_1_, #Bud23_1_, #Bud26_1_,
+        [id^=Dots], [id^=Flourish] {
+            visibility: hidden;
+        }
 
-		/* Full screen black overlay */
-		#intro-screen {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background-color: black;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			z-index: 9999;
-			transition: opacity 1.5s ease;
-			cursor: pointer;
-			/* Shows it is clickable */
-		}
+        /* --- INTRO SCREEN WITH BUTTON --- */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+        }
 
-		.intro-text {
-			color: white;
-			font-family: 'Meow Script', 'cursive';
-			font-size: 2rem;
-			width: 80%;
-			text-align: center;
-			animation: fadeInOut 2s infinite alternate;
-			margin-bottom: 20px;
-		}
+        .intro-text {
+            color: white;
+            font-family: 'Meow Script', 'cursive';
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
 
-		.tap-instruction {
-			color: #888;
-			font-family: sans-serif;
-			font-size: 0.8rem;
-			margin-top: 20px;
-			opacity: 0.7;
-		}
+        /* THE BUTTON STYLE */
+        #play-button {
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 40px;
+            color: #5e2828;
+            font-family: sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 154, 158, 0.6);
+            outline: none;
+            animation: pulse 2s infinite;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-		@keyframes fadeInOut {
-			from {
-				opacity: 0.5;
-			}
+        #play-button:active {
+            transform: scale(0.95);
+        }
 
-			to {
-				opacity: 1;
-			}
-		}
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 154, 158, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 154, 158, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 154, 158, 0); }
+        }
 
-		.hidden {
-			opacity: 0 !important;
-			pointer-events: none;
-		}
-	</style>
+        .hidden {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
+    <div id="intro-screen">
+        <h1 class="intro-text">For Princess Pallu</h1>
+        <button id="play-button">Open Gift 🎁</button>
+    </div>
 
-	<div id="intro-screen">
-		<h1 class="intro-text">This beautiful crown for princess</h1>
-		<p class="tap-instruction">(Tap anywhere to start)</p>
-	</div>
-
-	<div class="container">
-		<!-- SVG CONTENT HERE -->
-		<svg id="flower-frame" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 641.5 637.3">
+    <div class="container">
+       <svg id="flower-frame" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 641.5 637.3">
 			<style type="text/css">
 				.st0 {
 					fill: #FFFFFF;
@@ -215,6 +209,7 @@
 						Princess pallu
 					</text>
 				</g>
+
 				<path id="Dots_1_" class="st0" d="M556.2,110c0,1.7-1.4,3.1-3.1,3.1c-1.7,0-3.1-1.4-3.1-3.1s1.4-3.1,3.1-3.1l0,0
 		C554.9,106.9,556.2,108.3,556.2,110z M631.5,446.1c-1.7,0-3.1,1.4-3.1,3.1s1.4,3.1,3.1,3.1c1.7,0,3.1-1.4,3.1-3.1l0,0
 		C634.6,447.5,633.2,446.1,631.5,446.1L631.5,446.1z M508.8,64.1c-1.4,0-2.5,1.1-2.5,2.5s1.1,2.5,2.5,2.5s2.5-1.1,2.5-2.5
@@ -999,153 +994,159 @@
 			</g>
 		</svg>
 
+        <audio id="royal-music" src="princess.mp3" preload="auto"></audio>
+    </div>
 
-	</div>
-	<audio id="royal-music" src="princess.mp3" preload="auto"></audio>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-	<script src='https://unpkg.co/gsap@3/dist/gsap.min.js'></script>
-	<script src='https://assets.codepen.io/16327/DrawSVGPlugin3.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src='https://unpkg.co/gsap@3/dist/gsap.min.js'></script>
+    <script src='https://assets.codepen.io/16327/DrawSVGPlugin3.min.js'></script>
 
-<script>
-    // 1. SETTINGS
-    const SONG_DURATION = 17;
-    const FADE_OUT_SPEED = 3;
+    <script>
+        // 1. SETTINGS
+        const SONG_DURATION = 17;
+        const FADE_OUT_SPEED = 3;
 
-    // Mobile specific: Check if audio is ready
-    const music = document.getElementById('royal-music');
-    const intro = document.getElementById('intro-screen');
+        // 2. BUTTON CLICK HANDLER
+        const startBtn = document.getElementById('play-button');
+        const introScreen = document.getElementById('intro-screen');
+        const music = document.getElementById('royal-music');
 
-    // 2. INTERACTION HANDLER (Unlocks Audio on Touch)
-    function startExperience(e) {
-        // Prevent double firing (touch + click)
-        if (e.type === 'touchstart') {
-            intro.removeEventListener('click', startExperience);
-        }
+        function startExperience() {
+            // A. PLAY MUSIC (Must happen exactly on click)
+            if (music) {
+                music.volume = 1.0;
+                var promise = music.play();
 
-        // --- STEP 1: AUDIO UNLOCK ---
-        if (music) {
-            music.volume = 1.0;
-            var playPromise = music.play();
-
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    console.log("Mobile Audio Started Successfully");
-                }).catch(error => {
-                    console.log("Audio Blocked: " + error);
-                });
+                if (promise !== undefined) {
+                    promise.then(_ => {
+                        console.log("Audio started!");
+                        // Audio success - Launch Animation
+                        launchAnimation();
+                    }).catch(error => {
+                        // IF MUSIC FAILS, THIS ALERT WILL SHOW ON PHONE
+                        alert("Music Error: " + error + "\nCheck if file name is exactly 'princess.mp3'");
+                        // Start animation anyway so screen doesn't freeze
+                        launchAnimation();
+                    });
+                }
+            } else {
+                launchAnimation();
             }
         }
 
-        // --- STEP 2: REMOVE INTRO SCREEN ---
-        intro.style.transition = "opacity 1s ease";
-        intro.style.opacity = 0;
+        function launchAnimation() {
+            // Hide Intro
+            introScreen.classList.add('hidden');
+            
+            // Wait 1 second for fade out, then remove display and start GSAP
+            setTimeout(() => {
+                introScreen.style.display = 'none';
+                startFlowerAnimation(); 
+            }, 1000);
+        }
 
-        intro.removeEventListener('click', startExperience);
-        intro.removeEventListener('touchstart', startExperience);
+        // 3. ATTACH LISTENER TO BUTTON
+        if(startBtn) {
+            // We use 'click' because it is the most reliable for Buttons on mobile
+            startBtn.addEventListener('click', startExperience);
+        }
 
-        // --- STEP 3: START ANIMATION ---
-        setTimeout(() => {
-            intro.style.display = 'none';
-            startFlowerAnimation(); // Calls the function defined below
-        }, 1000);
-    }
+        // 4. MAIN ANIMATION FUNCTION
+        function startFlowerAnimation() {
+            // Ensure elements are visible for GSAP
+            gsap.set(['#Footer_group_1_', '[id^=PinkFlowerGroup]', '[id^=BaseGroup] path', 'path[id^=Stroke]', '[id^=Dots]'], {visibility: 'visible'});
 
-    // --- EVENT LISTENERS ---
-    if (intro) {
-        intro.addEventListener('touchstart', startExperience, { passive: false });
-        intro.addEventListener('click', startExperience);
-    }
+            // --- SELECTORS ---
+            var strokesLeftBottom = $('#LeftBottomGroup_1_ path[id^=Stroke]').toArray().reverse();
+            var strokesLeftTop = $('#LeftTopGroup_1_ path[id^=Stroke]').toArray().reverse();
+            var strokesRightBottom = $('#RightBottomGroup_1_ path[id^=Stroke]').toArray().reverse();
+            var strokesRightTop = $('#RightTopGroup_1_ path[id^=Stroke]').toArray().reverse();
 
-    // 3. MAIN ANIMATION FUNCTION
-    function startFlowerAnimation() {
-        
-        // --- SELECTORS ---
-        var strokesLeftBottom = $('#LeftBottomGroup_1_ path[id^=Stroke]').toArray().reverse();
-        var strokesLeftTop = $('#LeftTopGroup_1_ path[id^=Stroke]').toArray().reverse();
-        var strokesRightBottom = $('#RightBottomGroup_1_ path[id^=Stroke]').toArray().reverse();
-        var strokesRightTop = $('#RightTopGroup_1_ path[id^=Stroke]').toArray().reverse();
+            var stemGroup1 = ['#Stem2_1_', '#Stem3_1_', '#Stem4_1_', '#Stem5a_1_', '#Stem5b_1_', '#Stem6_1_', '#Stem7a_1_', '#Stem7b_1_', '#Stem7c_1_', '#Stem8_1_'];
+            var stemGroup2 = ['#Stem17_1_', '#Stem18_1_', '#Stem19_1_', '#Stem20a_1_', '#Stem20b_1_', '#Stem21_1_', '#Stem22a_1_', '#Stem22b_1_', '#Stem22c_1_', '#Stem23_1_'];
+            var stemGroup3 = ['#Stem10_1_', '#Stem11_1_', '#Stem12a_1_', '#Stem12b_1_'];
+            var stemGroup4 = ['#Stem26_1_', '#Stem27_1_', '#Stem28a_1_', '#Stem28b_1_'];
+            var stemGroup5 = ['#Stem13a_1_', '#Stem13b_1_', '#Stem13c_1_'];
+            var stemGroup6 = ['#Stem29a_1_', '#Stem29b_1_', '#Stem29c_1_'];
 
-        var stemGroup1 = ['#Stem2_1_', '#Stem3_1_', '#Stem4_1_', '#Stem5a_1_', '#Stem5b_1_', '#Stem6_1_', '#Stem7a_1_', '#Stem7b_1_', '#Stem7c_1_', '#Stem8_1_'];
-        var stemGroup2 = ['#Stem17_1_', '#Stem18_1_', '#Stem19_1_', '#Stem20a_1_', '#Stem20b_1_', '#Stem21_1_', '#Stem22a_1_', '#Stem22b_1_', '#Stem22c_1_', '#Stem23_1_'];
-        var stemGroup3 = ['#Stem10_1_', '#Stem11_1_', '#Stem12a_1_', '#Stem12b_1_'];
-        var stemGroup4 = ['#Stem26_1_', '#Stem27_1_', '#Stem28a_1_', '#Stem28b_1_'];
-        var stemGroup5 = ['#Stem13a_1_', '#Stem13b_1_', '#Stem13c_1_'];
-        var stemGroup6 = ['#Stem29a_1_', '#Stem29b_1_', '#Stem29c_1_'];
+            var stemVarsFrom = { drawSVG: "0% 0%", autoAlpha: 1 };
+            var stemVarsTo = { drawSVG: "0% 100%", duration: 2, stagger: 0.5 };
 
-        var stemVarsFrom = { drawSVG: "0% 0%", autoAlpha: 1 };
-        var stemVarsTo = { drawSVG: "0% 100%", duration: 2, stagger: 0.5 };
+            var leafGroup1 = ['#Leaf2_1_', '#Leaf17_1_'];
+            var leafGroup2 = ['#Leaf4_1_', '#Leaf5a_1_', '#Leaf5b_1_'];
+            var leafGroup3 = ['#Leaf19_1_', '#Leaf20a_1_', '#Leaf20b_1_'];
+            var leafGroup4 = ['#Leaf11_1_', '#Leaf12a_1_', '#Leaf12b_1_'];
+            var leafGroup5 = ['#Leaf27_1_', '#Leaf28a_1_', '#Leaf28b_1_'];
+            var leafGroup6 = ['#Leaf13a_1_', '#Leaf13b_1_', '#Leaf13c_1_'];
+            var leafGroup7 = ['#Leaf29a_1_', '#Leaf29b_1_', '#Leaf29c_1_'];
 
-        var leafGroup1 = ['#Leaf2_1_', '#Leaf17_1_'];
-        var leafGroup2 = ['#Leaf4_1_', '#Leaf5a_1_', '#Leaf5b_1_'];
-        var leafGroup3 = ['#Leaf19_1_', '#Leaf20a_1_', '#Leaf20b_1_'];
-        var leafGroup4 = ['#Leaf11_1_', '#Leaf12a_1_', '#Leaf12b_1_'];
-        var leafGroup5 = ['#Leaf27_1_', '#Leaf28a_1_', '#Leaf28b_1_'];
-        var leafGroup6 = ['#Leaf13a_1_', '#Leaf13b_1_', '#Leaf13c_1_'];
-        var leafGroup7 = ['#Leaf29a_1_', '#Leaf29b_1_', '#Leaf29c_1_'];
+            var budGroup1 = ['#Bud3_1_', '#Bud6_1_'];
+            var budGroup2 = ['#Bud18_1_', '#Bud21_1_'];
+            var budGroup3 = ['#Bud7a_1_', '#Bud7b_1_', '#Bud7c_1_', '#Bud8_1_'];
+            var budGroup4 = ['#Bud22a_1_', '#Bud22b_1_', '#Bud22c_1_', '#Bud23_1_'];
+            var budGroup5 = ['#Bud10_1_', '#Bud26_1_'];
 
-        var budGroup1 = ['#Bud3_1_', '#Bud6_1_'];
-        var budGroup2 = ['#Bud18_1_', '#Bud21_1_'];
-        var budGroup3 = ['#Bud7a_1_', '#Bud7b_1_', '#Bud7c_1_', '#Bud8_1_'];
-        var budGroup4 = ['#Bud22a_1_', '#Bud22b_1_', '#Bud22c_1_', '#Bud23_1_'];
-        // Fixed the typo here:
-        var budGroup5 = ['#Bud10_1_', '#Bud26_1_'];
+            var dots = $('#Dots_1_');
 
-        var dots = $('#Dots_1_');
+            // --- TIMELINE ---
+            var tl = gsap.timeline()
+                .set('#Footer_group_1_', { autoAlpha: 1 })
+                .fromTo(['#Stem16_1_', '#Stem1_1_'], { drawSVG: "0% 0%" }, { duration: 1.5, drawSVG: "0% 100%" }, 'start')
+                .fromTo('#BaseGroup16_1_ path', { autoAlpha: 1, scale: 0, transformOrigin: '-10% 130%' }, { duration: 1, scale: 1 }, 1.2, 'flower1')
+                .fromTo('#PinkFlowerGroup16_1_', { autoAlpha: 1, scale: 0, transformOrigin: '35% 110%' }, { duration: 2, scale: 1 }, 'flower1-=0.55')
+                .fromTo('#BaseGroup1_1_ path', { autoAlpha: 1, scale: 0, transformOrigin: '90% 130%' }, { duration: 1, scale: 1 }, 1.2, 'flower1')
+                .fromTo('#PinkFlowerGroup1_1_', { autoAlpha: 1, scale: 0, transformOrigin: '65% 110%' }, { duration: 2, scale: 1 }, 'flower1-=0.55')
+                .fromTo(['#Stem9_1_', '#Stem25_1_'], { drawSVG: "0% 0%", autoAlpha: 1 }, { duration: 2, drawSVG: "0% 100%" }, 'flower1+=0.5')
+                .fromTo('#BaseGroup9_1_ path', { autoAlpha: 1, scale: 0, transformOrigin: '-10% 130%' }, { duration: 1, scale: 1 }, 'flower2-=0.5')
+                .fromTo('#PinkFlowerGroup9_1_', { autoAlpha: 1, scale: 0, transformOrigin: '5% 110%' }, { duration: 2, scale: 1 }, 'flower2')
+                .fromTo('#BaseGroup25_1_ path', { autoAlpha: 1, scale: 0, transformOrigin: '105% 130%' }, { duration: 1, scale: 1 }, 'flower2-=0.5')
+                .fromTo('#PinkFlowerGroup25_1_', { autoAlpha: 1, scale: 0, transformOrigin: '95% 110%' }, { duration: 2, scale: 1 }, 'flower2')
+                .fromTo(stemGroup1, stemVarsFrom, stemVarsTo, 'start+=0.1')
+                .fromTo(stemGroup2, stemVarsFrom, stemVarsTo, 'start+=0.1')
+                .fromTo(stemGroup3, stemVarsFrom, stemVarsTo, 'flower2-=1.5')
+                .fromTo(stemGroup4, stemVarsFrom, stemVarsTo, 'flower2-=1.5')
+                .fromTo(stemGroup5, stemVarsFrom, stemVarsTo, 'flower3-=1')
+                .fromTo(stemGroup6, stemVarsFrom, stemVarsTo, 'flower3-=1')
+                .fromTo(leafGroup1, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["80% 45%", "20% 45%"]) }, { duration: 2, scale: 1 }, 'flower1-=1')
+                .fromTo(leafGroup2, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["80% 25%", "60% 35%", "70% 75%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower1')
+                .fromTo(leafGroup3, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["20% 25%", "40% 35%", "30% 75%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower1')
+                .fromTo(leafGroup4, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["90% 70%", "100% 100%", "0% 90%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower2')
+                .fromTo(leafGroup5, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["10% 70%", "0% 100%", "100% 90%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower2')
+                .fromTo(leafGroup6, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["0% 90%", "10% 50%", "70% 60%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower3')
+                .fromTo(leafGroup7, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["100% 90%", "90% 50%", "30% 60%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower3')
+                .fromTo(budGroup1, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(['220% -10%', '55% 100%']) }, { duration: 2, scale: 1, stagger: 2.75 }, 'flower1-=0.75')
+                .fromTo(budGroup2, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(['-120% -10%', '45% 100%']) }, { duration: 2, scale: 1, stagger: 2.75 }, 'flower1-=0.75')
+                .fromTo(budGroup3, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(['10% 110%', '0% 100%', '0% 100%', '80% 100%']) }, { duration: 2, scale: 1, stagger: 0.5 }, 'flower2')
+                .fromTo(budGroup4, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(['90% 110%', '100% 100%', '100% 100%', '20% 100%']) }, { duration: 2, scale: 1, stagger: 0.5 }, 'flower2')
+                .fromTo(budGroup5, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(['-50% 120%', '150% 120%']) }, { duration: 2, scale: 1 }, 'flower2-=0.5')
+                .fromTo(strokesLeftBottom, stemVarsFrom, { drawSVG: "0% 100%", duration: 2, stagger: 1 }, 1)
+                .fromTo(strokesRightBottom, stemVarsFrom, { drawSVG: "0% 100%", duration: 2, stagger: 1 }, 1)
+                .fromTo(strokesLeftTop, stemVarsFrom, { drawSVG: "0% 100%", duration: 2, stagger: 1 }, 'flower1+=0.5')
+                .fromTo(strokesRightTop, stemVarsFrom, { drawSVG: "0% 100%", duration: 2, stagger: 1 }, 'flower1+=0.5')
+                .fromTo(dots, 6, { autoAlpha: 0 }, { autoAlpha: 1, ease: "expo.out" }, 'flower3+=1')
+                .fromTo(dots, 5, { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, ease: "expo.out" }, 'flower3');
 
-        // --- GSAP TIMELINE ---
-        var tl = gsap.timeline()
-            .set('#Footer_group_1_', { autoAlpha: 1 })
-            .fromTo(['#Stem16_1_', '#Stem1_1_'], { drawSVG: "0% 0%" }, { duration: 1.5, drawSVG: "0% 100%" }, 'start')
-            .fromTo('#BaseGroup16_1_ path', { autoAlpha: 1, scale: 0, transformOrigin: '-10% 130%' }, { duration: 1, scale: 1 }, 1.2, 'flower1')
-            .fromTo('#PinkFlowerGroup16_1_', { autoAlpha: 1, scale: 0, transformOrigin: '35% 110%' }, { duration: 2, scale: 1 }, 'flower1-=0.55')
-            .fromTo('#BaseGroup1_1_ path', { autoAlpha: 1, scale: 0, transformOrigin: '90% 130%' }, { duration: 1, scale: 1 }, 1.2, 'flower1')
-            .fromTo('#PinkFlowerGroup1_1_', { autoAlpha: 1, scale: 0, transformOrigin: '65% 110%' }, { duration: 2, scale: 1 }, 'flower1-=0.55')
-            .fromTo(['#Stem9_1_', '#Stem25_1_'], { drawSVG: "0% 0%", autoAlpha: 1 }, { duration: 2, drawSVG: "0% 100%" }, 'flower1+=0.5')
-            .fromTo('#BaseGroup9_1_ path', { autoAlpha: 1, scale: 0, transformOrigin: '-10% 130%' }, { duration: 1, scale: 1 }, 'flower2-=0.5')
-            .fromTo('#PinkFlowerGroup9_1_', { autoAlpha: 1, scale: 0, transformOrigin: '5% 110%' }, { duration: 2, scale: 1 }, 'flower2')
-            .fromTo('#BaseGroup25_1_ path', { autoAlpha: 1, scale: 0, transformOrigin: '105% 130%' }, { duration: 1, scale: 1 }, 'flower2-=0.5')
-            .fromTo('#PinkFlowerGroup25_1_', { autoAlpha: 1, scale: 0, transformOrigin: '95% 110%' }, { duration: 2, scale: 1 }, 'flower2')
-            .fromTo(stemGroup1, stemVarsFrom, stemVarsTo, 'start+=0.1')
-            .fromTo(stemGroup2, stemVarsFrom, stemVarsTo, 'start+=0.1')
-            .fromTo(stemGroup3, stemVarsFrom, stemVarsTo, 'flower2-=1.5')
-            .fromTo(stemGroup4, stemVarsFrom, stemVarsTo, 'flower2-=1.5')
-            .fromTo(stemGroup5, stemVarsFrom, stemVarsTo, 'flower3-=1')
-            .fromTo(stemGroup6, stemVarsFrom, stemVarsTo, 'flower3-=1')
-            .fromTo(leafGroup1, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["80% 45%", "20% 45%"]) }, { duration: 2, scale: 1 }, 'flower1-=1')
-            .fromTo(leafGroup2, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["80% 25%", "60% 35%", "70% 75%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower1')
-            .fromTo(leafGroup3, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["20% 25%", "40% 35%", "30% 75%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower1')
-            .fromTo(leafGroup4, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["90% 70%", "100% 100%", "0% 90%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower2')
-            .fromTo(leafGroup5, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["10% 70%", "0% 100%", "100% 90%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower2')
-            .fromTo(leafGroup6, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["0% 90%", "10% 50%", "70% 60%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower3')
-            .fromTo(leafGroup7, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(["100% 90%", "90% 50%", "30% 60%"]) }, { duration: 2, stagger: 0.5, scale: 1 }, 'flower3')
-            .fromTo(budGroup1, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(['220% -10%', '55% 100%']) }, { duration: 2, scale: 1, stagger: 2.75 }, 'flower1-=0.75')
-            .fromTo(budGroup2, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(['-120% -10%', '45% 100%']) }, { duration: 2, scale: 1, stagger: 2.75 }, 'flower1-=0.75')
-            .fromTo(budGroup3, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(['10% 110%', '0% 100%', '0% 100%', '80% 100%']) }, { duration: 2, scale: 1, stagger: 0.5 }, 'flower2')
-            .fromTo(budGroup4, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(['90% 110%', '100% 100%', '100% 100%', '20% 100%']) }, { duration: 2, scale: 1, stagger: 0.5 }, 'flower2')
-            .fromTo(budGroup5, { autoAlpha: 1, scale: 0, transformOrigin: gsap.utils.wrap(['-50% 120%', '150% 120%']) }, { duration: 2, scale: 1 }, 'flower2-=0.5')
-            .fromTo(strokesLeftBottom, stemVarsFrom, { drawSVG: "0% 100%", duration: 2, stagger: 1 }, 1)
-            .fromTo(strokesRightBottom, stemVarsFrom, { drawSVG: "0% 100%", duration: 2, stagger: 1 }, 1)
-            .fromTo(strokesLeftTop, stemVarsFrom, { drawSVG: "0% 100%", duration: 2, stagger: 1 }, 'flower1+=0.5')
-            .fromTo(strokesRightTop, stemVarsFrom, { drawSVG: "0% 100%", duration: 2, stagger: 1 }, 'flower1+=0.5')
-            .fromTo(dots, 6, { autoAlpha: 0 }, { autoAlpha: 1, ease: "expo.out" }, 'flower3+=1')
-            // Chaining was broken here, fixed it by removing semicolon and continuing chain
-            .fromTo(dots, 5, { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, ease: "expo.out" }, 'flower3')
+            // NAME ENTRANCE
+            tl.fromTo('#CrownNameGroup',
+                { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" },
+                { duration: 2, autoAlpha: 1, scale: 1, ease: "elastic.out(1, 0.5)" },
+                'flower3+=1'
+            );
 
-            // --- EXIT SEQUENCE ---
-            .to('body', { backgroundColor: "black", duration: FADE_OUT_SPEED, delay: SONG_DURATION }, "0")
-            .to(['svg', '#intro-screen'], { autoAlpha: 0, duration: FADE_OUT_SPEED }, `-=${FADE_OUT_SPEED}`)
-            .add(() => {
-                if (music) {
-                    gsap.to(music, {
-                        volume: 0, duration: FADE_OUT_SPEED, onComplete: () => {
-                            music.pause();
-                            document.body.innerHTML = ""; // Clean exit
-                        }
-                    });
-                }
-            }, `-=${FADE_OUT_SPEED}`);
-    }
-</script>
+            // EXIT SEQUENCE
+            tl.to('body', { backgroundColor: "black", duration: FADE_OUT_SPEED, delay: SONG_DURATION }, "0")
+                .to(['svg', '#intro-screen'], { autoAlpha: 0, duration: FADE_OUT_SPEED }, `-=${FADE_OUT_SPEED}`)
+                .add(() => {
+                    if (music) {
+                        gsap.to(music, {
+                            volume: 0, duration: FADE_OUT_SPEED, onComplete: () => {
+                                music.pause();
+                                document.body.innerHTML = "";
+                            }
+                        });
+                    }
+                }, `-=${FADE_OUT_SPEED}`);
+        }
+    </script>
 </body>
-
 </html>
