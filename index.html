@@ -889,8 +889,9 @@ Princess pallu
 // 1. WRAP YOUR TIMELINE IN A FUNCTION
 // This prevents the animation from starting immediately
 // 1. SETTINGS - ADJUST THESE
-const SONG_DURATION = 17; // How many seconds the whole show lasts before fading out
-const FADE_OUT_SPEED = 3;  // How many seconds the exit fade takes
+// 1. SETTINGS
+const SONG_DURATION = 17; 
+const FADE_OUT_SPEED = 3;  
 
 function startFlowerAnimation() {
     const music = document.getElementById('royal-music');
@@ -962,55 +963,63 @@ function startFlowerAnimation() {
         .fromTo(dots, 6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Expo.easeOut }, 'flower3+=1')
         .fromTo(dots, 5, { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, ease: Expo.easeOut }, 'flower3');
 
-    // 3. FINAL NAME ENTRANCE (Your choice from before)
+    // Ensure name entrance is included
     tl.fromTo('#CrownNameGroup', 
         { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" }, 
         { duration: 2, autoAlpha: 1, scale: 1, ease: "elastic.out(1, 0.5)" }, 
         'flower3+=1'
     );
 
-    // 4. THE SHUTDOWN SEQUENCE (Fades to black at end of song)
+    // EXIT SEQUENCE
     tl.to('body', {
         backgroundColor: "black",
         duration: FADE_OUT_SPEED,
         delay: SONG_DURATION
-    }, "0") // Start counting delay from the very beginning of the timeline
+    }, "0")
     .to(['svg', '#princess-name'], {
         autoAlpha: 0,
         duration: FADE_OUT_SPEED
     }, `-=${FADE_OUT_SPEED}`)
     .add(() => {
-        gsap.to(music, { volume: 0, duration: FADE_OUT_SPEED, onComplete: () => music.pause() });
+        gsap.to(music, { volume: 0, duration: FADE_OUT_SPEED, onComplete: () => {
+            music.pause();
+            // This is the "Shutdown" feel
+            document.body.innerHTML = ""; 
+        }});
     }, `-=${FADE_OUT_SPEED}`);
 }
 
-// 5. CLICK TO START LOGIC
+// 2. MOBILE AUDIO UNLOCKER
+// We use 'touchstart' because phones respond to it faster than 'click'
+window.addEventListener('touchstart', initShow, { passive: false });
 window.addEventListener('mousedown', initShow);
-window.addEventListener('touchstart', initShow);
 
 let hasStarted = false;
 function initShow() {
-    if (hasStarted) return; // Prevent double clicking
+    if (hasStarted) return;
     hasStarted = true;
 
-    const intro = document.getElementById('intro-screen');
     const music = document.getElementById('royal-music');
+    const intro = document.getElementById('intro-screen');
 
-    // Play music immediately on click
-    music.play();
+    // CRITICAL FOR PHONES: 
+    // We play and immediately pause or just play to "prime" the audio engine
+    music.play().then(() => {
+        // Audio is now "unlocked" on mobile
+    }).catch(error => {
+        console.log("Mobile audio auto-play blocked, retrying...", error);
+    });
 
-    // Start the visual sequence
+    // Start visuals
     setTimeout(() => {
-        intro.classList.add('hidden'); // Fade intro text
-        
+        intro.classList.add('hidden');
         setTimeout(() => {
             intro.style.display = 'none';
-            startFlowerAnimation(); // Start drawing crown
-        }, 1000); 
-    }, 3000); 
+            startFlowerAnimation();
+        }, 1500);
+    }, 3000);
 }
 </script>
 
 </body>
 </html>
-
