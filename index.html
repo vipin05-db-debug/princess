@@ -117,8 +117,8 @@
 
 <body>
 	<div id="intro-screen">
-		<h1 class="intro-text">This beautiful crown for princess</h1>
-	</div>
+    <h1 class="intro-text" id="tap-hint">This beautiful crown for princess <br> (Tap to Open)</h1>
+</div>
 	<!-- partial:index.partial.html -->
 	<div class="container">
 		<svg id="flower-frame" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 641.5 637.3">
@@ -1073,30 +1073,38 @@ function startFlowerAnimation() {
 
 // Mobile Start Logic
 let hasStarted = false;
+
 function initShow() {
     if (hasStarted) return;
     hasStarted = true;
 
     const music = document.getElementById('royal-music');
     const intro = document.getElementById('intro-screen');
-    const hint = document.getElementById('tap-hint');
 
-    // Unlock Audio IMMEDIATELY on touch
-    music.play();
-    hint.innerText = "Music Unlocked...";
+    // 1. Play the music immediately
+    // We wrap it in a promise catch to handle browsers that are extra strict
+    music.play().then(() => {
+        console.log("Playback started successfully");
+    }).catch(error => {
+        console.log("Playback failed, trying alternative...", error);
+        // Fallback: Some browsers require a second trigger
+        music.play(); 
+    });
 
+    // 2. Visual transitions
+    intro.classList.add('hidden');
+    
     setTimeout(() => {
-        intro.classList.add('hidden');
-        setTimeout(() => {
-            intro.style.display = 'none';
-            startFlowerAnimation();
-        }, 1200);
-    }, 1000);
+        intro.style.display = 'none';
+        startFlowerAnimation();
+    }, 1500);
 }
 
-window.addEventListener('touchstart', initShow);
-window.addEventListener('mousedown', initShow);
+// 3. Add 'click' for desktop and 'touchstart' for mobile
+window.addEventListener('touchstart', initShow, { passive: false });
+window.addEventListener('click', initShow);
 </script>
 </body>
 
 </html>
+
